@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="dist" name="LibJHDF">
+  <description>Builds LibJHDF</description>
+  <property file="local.properties"/>
+  <property file="project.properties"/>
+  <import file="classpath.xml"/>
+  <import file="qc.xml"/>
+  <import file="native.xml"/>
+
+  <!-- ==================================== 
+       target: init
+       Initializes build environment                      
+       ==================================== -->
+  <target name="init">
+    <tstamp>
+      <format property="DSTAMP" pattern="yyyyMMdd"/>
+      <format property="TSTAMP" pattern="HH:mm"/>
+      <format property="BSTAMP" pattern="yyyyMMddHHmm"/>
+    </tstamp>
+    <mkdir dir="${java}"/>
+    <mkdir dir="${junit}"/>
+    <mkdir dir="${lib}"/>
+
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${classes}"/>
+
+
+    <available 
+	property="junit.available"
+	classname="junit.framework.TestCase"
+	classpathref="classpath.tools"/>
+
+    <available 
+	property="checkstyle.available"
+	resource="checkstyletask.properties"
+	classpathref="classpath.tools"/>
+
+    <available 
+	property="jdepend.available"
+	classname="jdepend.framework.JDepend"
+	classpathref="classpath.tools"/>
+    
+    <available 
+	property="lint4j.available"
+	classname="com.jutils.lint4j.ant.Lint4jAntTask"
+	classpathref="classpath.tools"/>
+
+    <available 
+	property="findbugs.available"
+	resource="edu/umd/cs/findbugs/anttask/tasks.properties"
+	classpathref="classpath.tools"/>
+
+    <available 
+	property="pmd.available"
+	classname="net.sourceforge.pmd.ant.PMDTask"
+	classpathref="classpath.tools"/>
+
+    <available 
+	property="cobertura.available"
+	resource="tasks.properties"
+	classpathref="classpath.tools"/>
+    
+    <condition property="swig.exe.available">
+      <isset property="swig.exe"/>
+    </condition>
+
+    <condition property="msbuild.exe.available">
+      <isset property="msbuild.exe"/>
+    </condition>
+
+  </target>
+
+  <!-- ================================= 
+       target: all
+       Builds all generated artifacts
+
+       Note that we are executing deps in order of least likelyhood of 
+       failure. Deps that do not depend on compile run first, then bytecode 
+       metrics, and unit tests last.
+       ================================= -->
+    <target name="all"
+            description="Builds everything"
+	    depends="javadoc, pmd, checkstyle, dist, jdepend, lint4j, junit, cobertura">      
+    </target>  
+
+
+  <!-- ================================= 
+       target: clean
+       Cleans build environment
+       ================================= -->
+    <target name="clean"
+            description="Cleans build environment">
+      <delete dir="${classes}"/>
+      <delete>
+	<fileset dir="${dist}">
+	  <include name="**/*"/>
+	</fileset>
+      </delete>
+      <mkdir dir="dist"/>
+    </target>  
+
+
+    <!-- ================================= 
+	 target: clean-all
+	 Cleans build environment
+	 ================================= -->
+    <target name="clean-all"
+            description="Cleans build environment">
+      <delete dir="${dist}"/>
+      <delete dir="${target}"/>
+      <delete dir="${javadoc}"/>
+      <mkdir dir="dist"/>
+      <mkdir dir="target"/>
+    </target>  
+
+
+    <!-- ================================= 
+	 target: cvs-update
+	 Updates the project from CVS
+	 ================================= -->
+    <target name="cvs-update"
+	    description="Updates the project from CVS">
+
+      <taskdef resource="svntask.properties"
+	       classpathref="classpath.tools"/>
+      
+      <svn>
+	<update dir="." recurse="true"/>
+      </svn>
+    </target> 
+
+
+
+  <!-- ================================= 
+       target: compile
+       Compiles java source to bytecode
+       ================================= -->
+    <target name="compile" depends="swig"
+            description="Compiles java source to bytecode">
+
+      <javac destdir="${classes}"
+             classpathref="classpath.build"
+	     debug="${javac.debug}"
+	     debuglevel="${javac.debuglevel}"
+	     deprecation="${javac.deprication}"
+	     optimize="${javac.optimize}"
+	     verbose="${javac.verbose}"
+	     source="${javac.source}"
+	     target="${javac.target}">
+	  <src path="${java}"/>
+	  <src path="${swig-java}"/>
+        </javac>
+
+	<copy todir="${classes}">
+	  <fileset dir="${java}">
+	    <exclude name="**/*.java"/>
+	    <exclude name="**/package.html"/>
+	  </fileset>
+	</copy>
+    </target>
+
+
+  <!-- ================================= 
+       target: javadoc
+       Generates JavaDocs
+     ================================== -->
+    <target name="javadoc" depends="init"
+            description="Generates JavaDocs">   
+   
+      <mkdir dir="${javadoc}"/>
+
+      <javadoc sourcepath="${java}"
+    	       destdir="${javadoc}"
+	       packagenames="permafrost.hdf.*"
+	       classpathref="classpath.build">
+      </javadoc>
+    </target>
+
+
+   <!-- ================================= 
+         target: dist
+         Packages java jar
+        ================================= -->
+  <target name="dist" depends="compile"
+          description="Packages java jar">
+
+    <jar destfile="${dist}/${libjhdf.jarname}">
+      <fileset dir="${classes}">
+	<include name="**/*"/>
+      </fileset>
+      
+      <manifest>
+	<attribute name="Built-By" value="${user.name}"/>
+	<attribute name="Javac-Optimize" value="${javac.optimize}"/>
+	<attribute name="Javac-Debug" value="${javac.debug}"/>
+	<attribute name="Javac-Debug-Level" value="${javac.debuglevel}"/>
+	<attribute name="Javac-Target" value="${javac.target}"/>
+
+	<attribute name="Implementation-Title" 
+		   value="${project.name}-${libjhdf.name}"/>
+	<attribute name="Implementation-Version" 
+		   value="${libjhdf.version} ${TSTAMP} ${DSTAMP}"/> 
+	<attribute name="Implementation-Vendor" 
+		   value="${project.vendor}"/>
+       </manifest>
+     </jar>
+     
+  </target>
+
+
+<!-- ================================= 
+       target: sdk-dist
+       Archives the cleint software development kit
+       ================================= -->
+  <target name="sdk-dist" 
+	  description="Builds release SDK"
+	  depends="dist">
+     <zip destfile="${dist}/${app.apiname}">
+      <zipfileset dir="${wsdl}" prefix="SDSX/${wsdl}"/>
+      <zipfileset dir="${xsd}" prefix="SDSX/${xsd}"/>
+      <zipfileset dir="${map}" prefix="SDSX/${map}"/>
+      <zipfileset dir="${stub-javadoc}" prefix="SDSX/docs/javadocs"/>
+      <zipfileset dir="${stub-ndoc}" prefix="SDSX/docs/ndocs"/>
+      <zipfileset dir="${dist}" prefix="SDSX" includes="${stub.jarname}"/>
+      <zipfileset dir="${dist}" prefix="SDSX" includes="${cstub.libname}"/>
+      <zipfileset dir="${dist}" prefix="SDSX" includes="*.pdb"/>
+    </zip>
+    
+  </target>
+
+
+  <!-- ==================================== 
+       target: diag
+       Prints diagnostic information about build environment
+       ==================================== -->  
+  <target name="diag" 
+	  depends="init">
+    <property name="hline" value="*****************************************************************"/>
+    <property name="span" value="*"/>
+
+    <echo message="${hline}"/>
+    <echo message="${span} QC Tools Available"/>
+    <echo message="${hline}"/>
+    <echo message="CheckStyle: ${checkstyle.available}"/>
+    <echo message="Cobertura:  ${cobertura.available}"/>
+    <echo message="JUnit:      ${junit.available}"/>
+    <echo message="Lint4j:     ${lint4j.available}"/>
+    <echo message="PMD:        ${pmd.available}"/>
+    <echo message="FindBugs:   ${findbugs.available}"/>
+    <echo message=""/>
+    <echo message="${hline}"/>
+    <echo message="${span} Build Tools Available"/>
+    <echo message="${hline}"/>
+    <echo message="SWIG:       ${swig.exe.available}"/>
+    <echo message="MSBuild:    ${msbuild.exe.available}"/>
+  </target>
+  
+</project>

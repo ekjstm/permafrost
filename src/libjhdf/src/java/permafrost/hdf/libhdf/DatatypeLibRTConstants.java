@@ -1,0 +1,278 @@
+/**
+ * 
+ */
+package permafrost.hdf.libhdf;
+
+import permafrost.hdf.libhdf.DatatypeLib;
+
+/**
+ *
+ */
+public class DatatypeLibRTConstants {
+    
+    private static DatatypeLibRTConstants INSTANCE;
+    
+    public final int H5T_IEEE_F32BE;
+    public final int H5T_IEEE_F32LE;
+    public final int H5T_IEEE_F64BE;
+    public final int H5T_IEEE_F64LE;
+    public final int H5T_STD_I8BE;
+    public final int H5T_STD_I8LE;
+    public final int H5T_STD_I16BE;
+    public final int H5T_STD_I16LE;
+    public final int H5T_STD_I32BE;
+    public final int H5T_STD_I64BE;
+    public final int H5T_STD_I32LE;
+    public final int H5T_STD_I64LE;
+    public final int H5T_STD_U8BE;
+    public final int H5T_STD_U8LE;
+    public final int H5T_STD_U16BE;
+    public final int H5T_STD_U16LE;
+    public final int H5T_STD_U32BE;
+    public final int H5T_STD_U32LE;
+    public final int H5T_STD_U64BE;
+    public final int H5T_STD_U64LE;
+    public final int H5T_STD_B8BE;
+    public final int H5T_STD_B8LE;
+    public final int H5T_STD_B16BE;
+    public final int H5T_STD_B16LE;
+    public final int H5T_STD_B32BE;
+    public final int H5T_STD_B32LE;
+    public final int H5T_STD_B64BE;
+    public final int H5T_STD_B64LE;
+    public final int H5T_STD_REF_OBJ;
+    public final int H5T_STD_REF_DSETREG;
+    public final int H5T_UNIX_D32BE;
+    public final int H5T_UNIX_D32LE;
+    public final int H5T_UNIX_D64BE;
+    public final int H5T_UNIX_D64LE;
+    public final int H5T_C_S1;
+    public final int H5T_NATIVE_SCHAR;
+    public final int H5T_NATIVE_UCHAR;
+    public final int H5T_NATIVE_SHORT;
+    public final int H5T_NATIVE_USHORT;
+    public final int H5T_NATIVE_INT;
+    public final int H5T_NATIVE_UINT;
+    public final int H5T_NATIVE_LONG;
+    public final int H5T_NATIVE_ULONG;
+    public final int H5T_NATIVE_LLONG;
+    public final int H5T_NATIVE_ULLONG;
+    public final int H5T_NATIVE_FLOAT;
+    public final int H5T_NATIVE_DOUBLE;
+    public final int H5T_NATIVE_LDOUBLE;
+    public final int H5T_NATIVE_B8;
+    public final int H5T_NATIVE_B16;
+    public final int H5T_NATIVE_B32;
+    public final int H5T_NATIVE_B64;
+    public final int H5T_NATIVE_OPAQUE;
+    public final int H5T_NATIVE_HADDR;
+    public final int H5T_NATIVE_HSIZE;
+    public final int H5T_NATIVE_HSSIZE;
+    public final int H5T_NATIVE_HERR;
+    public final int H5T_NATIVE_HBOOL;
+    public final int H5T_NATIVE_INT8;
+    public final int H5T_NATIVE_UINT8;
+    public final int H5T_NATIVE_INT_LEAST8;
+    public final int H5T_NATIVE_UINT_LEAST8;
+    public final int H5T_NATIVE_INT_FAST8;
+    public final int H5T_NATIVE_UINT_FAST8;
+    public final int H5T_NATIVE_INT16;
+    public final int H5T_NATIVE_UINT16;
+    public final int H5T_NATIVE_INT_LEAST16;
+    public final int H5T_NATIVE_UINT_LEAST16;
+    public final int H5T_NATIVE_INT_FAST16;
+    public final int H5T_NATIVE_UINT_FAST16;
+    public final int H5T_NATIVE_INT32;
+    public final int H5T_NATIVE_UINT32;
+    public final int H5T_NATIVE_INT_LEAST32;
+    public final int H5T_NATIVE_UINT_LEAST32;
+    public final int H5T_NATIVE_INT_FAST32;
+    public final int H5T_NATIVE_UINT_FAST32;
+    public final int H5T_NATIVE_INT64;
+    public final int H5T_NATIVE_UINT64;
+    public final int H5T_NATIVE_INT_LEAST64;
+    public final int H5T_NATIVE_UINT_LEAST64;
+    public final int H5T_NATIVE_INT_FAST64;
+    public final int H5T_NATIVE_UINT_FAST64;
+
+
+    /**
+     * Singleton constructor. 
+     */
+    private DatatypeLibRTConstants() {
+        super();
+        this.H5T_IEEE_F32BE = DatatypeLib.getH5T_IEEE_F32BE();
+        assert this.H5T_IEEE_F32BE > 0 : "Untrapped error in native code.";
+        this.H5T_IEEE_F32LE = DatatypeLib.getH5T_IEEE_F32LE();
+        assert this.H5T_IEEE_F32LE > 0 : "Untrapped error in native code.";
+        this.H5T_IEEE_F64BE = DatatypeLib.getH5T_IEEE_F64BE();
+        assert this.H5T_IEEE_F64BE > 0 : "Untrapped error in native code.";
+        this.H5T_IEEE_F64LE = DatatypeLib.getH5T_IEEE_F64LE();
+        assert this.H5T_IEEE_F64LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I8BE = DatatypeLib.getH5T_STD_I8BE();
+        assert this.H5T_STD_I8BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I8LE = DatatypeLib.getH5T_STD_I8LE();
+        assert this.H5T_STD_I8LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I16BE = DatatypeLib.getH5T_STD_I16BE();
+        assert this.H5T_STD_I16BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I16LE = DatatypeLib.getH5T_STD_I16LE();
+        assert this.H5T_STD_I16LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I32BE = DatatypeLib.getH5T_STD_I32BE();
+        assert this.H5T_STD_I32BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I64BE = DatatypeLib.getH5T_STD_I64BE();
+        assert this.H5T_STD_I64BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I32LE = DatatypeLib.getH5T_STD_I32LE();
+        assert this.H5T_STD_I32LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_I64LE = DatatypeLib.getH5T_STD_I64LE();
+        assert this.H5T_STD_I64LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U8BE = DatatypeLib.getH5T_STD_U8BE();
+        assert this.H5T_STD_U8BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U8LE = DatatypeLib.getH5T_STD_U8LE();
+        assert this.H5T_STD_U8LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U16BE = DatatypeLib.getH5T_STD_U16BE();
+        assert this.H5T_STD_U16BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U16LE = DatatypeLib.getH5T_STD_U16LE();
+        assert this.H5T_STD_U16LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U32BE = DatatypeLib.getH5T_STD_U32BE();
+        assert this.H5T_STD_U32BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U32LE = DatatypeLib.getH5T_STD_U32LE();
+        assert this.H5T_STD_U32LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U64BE = DatatypeLib.getH5T_STD_U64BE();
+        assert this.H5T_STD_U64BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_U64LE = DatatypeLib.getH5T_STD_U64LE();
+        assert this.H5T_STD_U64LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B8BE = DatatypeLib.getH5T_STD_B8BE();
+        assert this.H5T_STD_B8BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B8LE = DatatypeLib.getH5T_STD_B8LE();
+        assert this.H5T_STD_B8LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B16BE = DatatypeLib.getH5T_STD_B16BE();
+        assert this.H5T_STD_B16BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B16LE = DatatypeLib.getH5T_STD_B16LE();
+        assert this.H5T_STD_B16LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B32BE = DatatypeLib.getH5T_STD_B32BE();
+        assert this.H5T_STD_B32BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B32LE = DatatypeLib.getH5T_STD_B32LE();
+        assert this.H5T_STD_B32LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B64BE = DatatypeLib.getH5T_STD_B64BE();
+        assert this.H5T_STD_B64BE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_B64LE = DatatypeLib.getH5T_STD_B64LE();
+        assert this.H5T_STD_B64LE > 0 : "Untrapped error in native code.";
+        this.H5T_STD_REF_OBJ = DatatypeLib.getH5T_STD_REF_OBJ();
+        assert this.H5T_STD_REF_OBJ > 0 : "Untrapped error in native code.";
+        this.H5T_STD_REF_DSETREG = DatatypeLib.getH5T_STD_REF_DSETREG();
+        assert this.H5T_STD_REF_DSETREG > 0 : "Untrapped error in native code.";
+        this.H5T_UNIX_D32BE = DatatypeLib.getH5T_UNIX_D32BE();
+        assert this.H5T_UNIX_D32BE > 0 : "Untrapped error in native code.";
+        this.H5T_UNIX_D32LE = DatatypeLib.getH5T_UNIX_D32LE();
+        assert this.H5T_UNIX_D32LE > 0 : "Untrapped error in native code.";
+        this.H5T_UNIX_D64BE = DatatypeLib.getH5T_UNIX_D64BE();
+        assert this.H5T_UNIX_D64BE > 0 : "Untrapped error in native code.";
+        this.H5T_UNIX_D64LE = DatatypeLib.getH5T_UNIX_D64LE();
+        assert this.H5T_UNIX_D64LE > 0 : "Untrapped error in native code.";
+        this.H5T_C_S1 = DatatypeLib.getH5T_C_S1();
+        assert this.H5T_C_S1 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_SCHAR = DatatypeLib.getH5T_NATIVE_SCHAR();
+        assert this.H5T_NATIVE_SCHAR > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UCHAR = DatatypeLib.getH5T_NATIVE_UCHAR();
+        assert this.H5T_NATIVE_UCHAR > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_SHORT = DatatypeLib.getH5T_NATIVE_SHORT();
+        assert this.H5T_NATIVE_SHORT > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_USHORT = DatatypeLib.getH5T_NATIVE_USHORT();
+        assert this.H5T_NATIVE_USHORT > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT = DatatypeLib.getH5T_NATIVE_INT();
+        assert this.H5T_NATIVE_INT > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT = DatatypeLib.getH5T_NATIVE_UINT();
+        assert this.H5T_NATIVE_UINT > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_LONG = DatatypeLib.getH5T_NATIVE_LONG();
+        assert this.H5T_NATIVE_LONG > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_ULONG = DatatypeLib.getH5T_NATIVE_ULONG();
+        assert this.H5T_NATIVE_ULONG > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_LLONG = DatatypeLib.getH5T_NATIVE_LLONG();
+        assert this.H5T_NATIVE_LLONG > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_ULLONG = DatatypeLib.getH5T_NATIVE_ULLONG();
+        assert this.H5T_NATIVE_ULLONG > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_FLOAT = DatatypeLib.getH5T_NATIVE_FLOAT();
+        assert this.H5T_NATIVE_FLOAT > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_DOUBLE = DatatypeLib.getH5T_NATIVE_DOUBLE();
+        assert this.H5T_NATIVE_DOUBLE > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_LDOUBLE = DatatypeLib.getH5T_NATIVE_LDOUBLE();
+        assert this.H5T_NATIVE_LDOUBLE > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_B8 = DatatypeLib.getH5T_NATIVE_B8();
+        assert this.H5T_NATIVE_B8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_B16 = DatatypeLib.getH5T_NATIVE_B16();
+        assert this.H5T_NATIVE_B16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_B32 = DatatypeLib.getH5T_NATIVE_B32();
+        assert this.H5T_NATIVE_B32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_B64 = DatatypeLib.getH5T_NATIVE_B64();
+        assert this.H5T_NATIVE_B64 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_OPAQUE = DatatypeLib.getH5T_NATIVE_OPAQUE();
+        assert this.H5T_NATIVE_OPAQUE > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_HADDR = DatatypeLib.getH5T_NATIVE_HADDR();
+        assert this.H5T_NATIVE_HADDR > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_HSIZE = DatatypeLib.getH5T_NATIVE_HSIZE();
+        assert this.H5T_NATIVE_HSIZE > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_HSSIZE = DatatypeLib.getH5T_NATIVE_HSSIZE();
+        assert this.H5T_NATIVE_HSSIZE > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_HERR = DatatypeLib.getH5T_NATIVE_HERR();
+        assert this.H5T_NATIVE_HERR > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_HBOOL = DatatypeLib.getH5T_NATIVE_HBOOL();
+        assert this.H5T_NATIVE_HBOOL > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT8 = DatatypeLib.getH5T_NATIVE_INT8();
+        assert this.H5T_NATIVE_INT8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT8 = DatatypeLib.getH5T_NATIVE_UINT8();
+        assert this.H5T_NATIVE_UINT8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_LEAST8 = DatatypeLib.getH5T_NATIVE_INT_LEAST8();
+//        assert this.H5T_NATIVE_INT_LEAST8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_LEAST8 = DatatypeLib.getH5T_NATIVE_UINT_LEAST8();
+//        assert this.H5T_NATIVE_UINT_LEAST8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_FAST8 = DatatypeLib.getH5T_NATIVE_INT_FAST8();
+//        assert this.H5T_NATIVE_INT_FAST8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_FAST8 = DatatypeLib.getH5T_NATIVE_UINT_FAST8();
+//        assert this.H5T_NATIVE_UINT_FAST8 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT16 = DatatypeLib.getH5T_NATIVE_INT16();
+        assert this.H5T_NATIVE_INT16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT16 = DatatypeLib.getH5T_NATIVE_UINT16();
+        assert this.H5T_NATIVE_UINT16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_LEAST16 = DatatypeLib.getH5T_NATIVE_INT_LEAST16();
+//        assert this.H5T_NATIVE_INT_LEAST16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_LEAST16 = DatatypeLib.getH5T_NATIVE_UINT_LEAST16();
+//        assert this.H5T_NATIVE_UINT_LEAST16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_FAST16 = DatatypeLib.getH5T_NATIVE_INT_FAST16();
+//        assert this.H5T_NATIVE_INT_FAST16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_FAST16 = DatatypeLib.getH5T_NATIVE_UINT_FAST16();
+//        assert this.H5T_NATIVE_UINT_FAST16 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT32 = DatatypeLib.getH5T_NATIVE_INT32();
+        assert this.H5T_NATIVE_INT32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT32 = DatatypeLib.getH5T_NATIVE_UINT32();
+        assert this.H5T_NATIVE_UINT32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_LEAST32 = DatatypeLib.getH5T_NATIVE_INT_LEAST32();
+//        assert this.H5T_NATIVE_INT_LEAST32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_LEAST32 = DatatypeLib.getH5T_NATIVE_UINT_LEAST32();
+//        assert this.H5T_NATIVE_UINT_LEAST32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_FAST32 = DatatypeLib.getH5T_NATIVE_INT_FAST32();
+//        assert this.H5T_NATIVE_INT_FAST32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_FAST32 = DatatypeLib.getH5T_NATIVE_UINT_FAST32();
+//        assert this.H5T_NATIVE_UINT_FAST32 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT64 = DatatypeLib.getH5T_NATIVE_INT64();
+        assert this.H5T_NATIVE_INT64 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT64 = DatatypeLib.getH5T_NATIVE_UINT64();
+        assert this.H5T_NATIVE_UINT64 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_LEAST64 = DatatypeLib.getH5T_NATIVE_INT_LEAST64();
+//        assert this.H5T_NATIVE_INT_LEAST64 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_LEAST64 = DatatypeLib.getH5T_NATIVE_UINT_LEAST64();
+//        assert this.H5T_NATIVE_UINT_LEAST64 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_INT_FAST64 = DatatypeLib.getH5T_NATIVE_INT_FAST64();
+//        assert this.H5T_NATIVE_INT_FAST64 > 0 : "Untrapped error in native code.";
+        this.H5T_NATIVE_UINT_FAST64 = DatatypeLib.getH5T_NATIVE_UINT_FAST64();
+//        assert this.H5T_NATIVE_UINT_FAST64 > 0 : "Untrapped error in native code.";
+    }
+
+    
+    public static DatatypeLibRTConstants getInstance() {
+        if (DatatypeLibRTConstants.INSTANCE == null) {
+            DatatypeLibRTConstants.INSTANCE = new DatatypeLibRTConstants();
+        }
+        return (DatatypeLibRTConstants.INSTANCE);
+    }
+    
+}

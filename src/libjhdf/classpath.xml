@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="usage" name="project-classpath" basedir=".">
+  <description>Configures project classpath</description>
+  <property file="project.properties"/>
+
+ <path id="classpath.build">
+    <fileset dir="${lib}">
+      <include name="*.jar"/>
+    </fileset>
+ </path>
+
+ <path id="classpath.run">   
+   <path refid="classpath.build"/>  
+   <pathelement location="${classes}"/>
+ </path>
+ 
+
+ <path id="classpath.tools">
+   <path refid="classpath.build"/>   
+   <fileset dir="${lib}/tools">
+     <include name="*.jar"/>
+   </fileset>
+   <fileset dir="${lib}/tools/asm-3.1">
+     <include name="*.jar"/>
+   </fileset>
+ </path>
+
+ <path id="classpath.tools.asm-2">
+  <fileset dir="${lib}/tools/asm-2.2.1">
+     <include name="*.jar"/>
+   </fileset>
+   <path refid="classpath.tools"/>    
+ </path>
+
+ <path id="classpath.test">
+   <path refid="classpath.run"/>   
+   <path refid="classpath.tools"/>
+ </path>
+
+ 
+
+</project>

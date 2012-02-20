@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\zlib\contrib\vstudio\vc8\zlibvc.vcproj", "{8FD826F8-3739-44E6-8CC8-997122E53B8D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "szlib", "..\szlib\szlib.vcproj", "{A349F156-8CCB-4573-BFA8-B0234FA9CF32}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhdf", "..\libhdf\libhdf.vcproj", "{E81661FB-A70E-4310-9108-2B1FE50BE76E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32} = {A349F156-8CCB-4573-BFA8-B0234FA9CF32}
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D} = {8FD826F8-3739-44E6-8CC8-997122E53B8D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjhdf", "libjhdf.vcproj", "{125455B2-0C00-4A27-988D-9B403AF86335}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		ReleaseWithoutAsm|Win32 = ReleaseWithoutAsm|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D}.Debug|Win32.Build.0 = Debug|Win32
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D}.Release|Win32.ActiveCfg = Release|Win32
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D}.Release|Win32.Build.0 = Release|Win32
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D}.ReleaseWithoutAsm|Win32.ActiveCfg = ReleaseWithoutAsm|Win32
+		{8FD826F8-3739-44E6-8CC8-997122E53B8D}.ReleaseWithoutAsm|Win32.Build.0 = ReleaseWithoutAsm|Win32
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32}.Debug|Win32.Build.0 = Debug|Win32
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32}.Release|Win32.ActiveCfg = Release|Win32
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32}.Release|Win32.Build.0 = Release|Win32
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32}.ReleaseWithoutAsm|Win32.ActiveCfg = Release|Win32
+		{A349F156-8CCB-4573-BFA8-B0234FA9CF32}.ReleaseWithoutAsm|Win32.Build.0 = Release|Win32
+		{E81661FB-A70E-4310-9108-2B1FE50BE76E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E81661FB-A70E-4310-9108-2B1FE50BE76E}.Debug|Win32.Build.0 = Debug|Win32
+		{E81661FB-A70E-4310-9108-2B1FE50BE76E}.Release|Win32.ActiveCfg = Release|Win32
+		{E81661FB-A70E-4310-9108-2B1FE50BE76E}.Release|Win32.Build.0 = Release|Win32
+		{E81661FB-A70E-4310-9108-2B1FE50BE76E}.ReleaseWithoutAsm|Win32.ActiveCfg = Release|Win32
+		{E81661FB-A70E-4310-9108-2B1FE50BE76E}.ReleaseWithoutAsm|Win32.Build.0 = Release|Win32
+		{125455B2-0C00-4A27-988D-9B403AF86335}.Debug|Win32.ActiveCfg = Debug|Win32
+		{125455B2-0C00-4A27-988D-9B403AF86335}.Debug|Win32.Build.0 = Debug|Win32
+		{125455B2-0C00-4A27-988D-9B403AF86335}.Release|Win32.ActiveCfg = Release|Win32
+		{125455B2-0C00-4A27-988D-9B403AF86335}.Release|Win32.Build.0 = Release|Win32
+		{125455B2-0C00-4A27-988D-9B403AF86335}.ReleaseWithoutAsm|Win32.ActiveCfg = Release|Win32
+		{125455B2-0C00-4A27-988D-9B403AF86335}.ReleaseWithoutAsm|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

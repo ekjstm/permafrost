@@ -1,0 +1,16 @@
+This directory is for build files, IDE settings, etc. 
+
+
+Files: 
+build.xml          - The main build.
+classpath.xml      - Project classpath
+project.properties - Project layout and compile settings
+
+Subdirectories:
+
+bin                - Executables
+dist               - Deliverables (This directory will be destroyed by the clean-all task)
+docs               - Documentation
+lib                - Dependencies
+src                - Source Code
+target             - Intermediate build files (This directory will be destroyed by the clean-all task)

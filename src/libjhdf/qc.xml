@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="checkstyle" name="quality control">
+  <description>Runs quality control checks</description>
+  <property file="local.properties"/>
+  <property file="project.properties"/>
+  <import file="classpath.xml"/>
+
+ <!-- ==================================== 
+       target: reports
+       Builds QC reports
+       ==================================== -->
+  <target name="reports" 
+	  description="Builds QC  reports" 
+	  depends="jdepend, checkstyle, lint4j, pmd, findbugs, junit">
+
+  </target>
+
+  <!-- ==================================== 
+       target: checkstyle
+       Builds CheckStyle reports
+       ==================================== -->
+  <target name="checkstyle" 
+	  description="Builds CheckStyle reports" 
+	  depends="checkstyle-run">
+
+    <style in="${checkstyle}/${libjhdf.name}.cs.xml" 
+	   out="${checkstyle}/${libjhdf.name}.cs.html" 
+	   style="${checkstyle.xslt.html}"/> 
+ 
+    <style in="${checkstyle}/${libjhdf.name}.cs.xml" 
+	   out="${checkstyle}/${libjhdf.name}.cs.txt" 
+	   style="${checkstyle.xslt.text}"/>   
+  </target>
+
+
+  <!-- ==================================== 
+       target: checkstyle-run
+       Run checkstyle.                 
+       ==================================== --> 
+  <target name="checkstyle-run" 	  
+	  depends="init"	  
+	  if="checkstyle.available">
+    <mkdir dir="${checkstyle}"/>
+
+    <taskdef resource="checkstyletask.properties"
+	     classpathref="classpath.tools"/>
+
+    <checkstyle 
+	config="${checkstyle.config}"
+	 failOnViolation="false">
+      <fileset dir="${java}" includes="**/*.java"/>     
+
+      <!-- Uncomment the following line to dump the cs report to the 
+      console as it builds. Currently disabled because it spams up
+      the CruiseControl project build page. -->
+      <formatter type="plain"/>
+      <formatter type="plain" 
+		 toFile="${checkstyle}/${libjhdf.name}.cs.txt"/>
+      <formatter type="xml" 
+		 toFile="${checkstyle}/${libjhdf.name}.cs.xml"/>
+    </checkstyle>  
+  </target>
+
+
+ <!-- ==================================== 
+       target: jdepend
+       Builds jdepend reports              
+       ==================================== -->
+  <target name="jdepend" 
+	  description="Builds jdepend reports" 
+	  depends="jdepend-run">
+
+    <!-- The jdepend-frames style sheet that ships with ant 
+    stupidly overwrites whatever is in the out attribute and then creates
+    an index.html anyway. So we need to give an index.bad to set the outdir
+    and then ignore the bad file.
+    -->
+    <style in="${jdepend}/${libjhdf.name}.jdep.xml" 
+	   out="${jdepend}/index.tmp" 
+	   style="${jdepend.xslt.html}"/>  
+    <delete file="${jdepend}/index.tmp"/>
+  </target>
+
+
+  <!-- ==================================== 
+       target: jdepend-run
+       Run jdepend metrics                   
+       ==================================== --> 
+  <target name="jdepend-run" 	
+	  depends="compile"
+	  if="jdepend.available">    
+
+    <mkdir dir="${jdepend}"/>
+
+    <jdepend 
+	classpathref="classpath.tools"
+	format="xml" 
+	outputfile="${jdepend}/${libjhdf.name}.jdep.xml">
+      <exclude name="java.*"/>
+      <exclude name="javax.*"/>
+      <classespath>
+	<pathelement location="${classes}"/>
+      </classespath>
+    </jdepend>
+  </target>
+
+
+
+  <!-- ==================================== 
+       target: lint4j
+       Run lint4j checks                   
+       ==================================== -->   
+  <target name="lint4j" 
+	  description="Runs lint4j checks."
+	  depends="compile"
+	  if="lint4j.available">
+    
+    <mkdir dir="${lint4j}"/>
+
+    <taskdef name="lint4j" 
+	     classname="com.jutils.lint4j.ant.Lint4jAntTask"
+	     classpathref="classpath.tools"/>
+
+    <lint4j 
+	packages="permafrost.hdf.*" 
+	level="${lint4j.level}" 
+	exact="${lint4j.exact}"
+	sourcepath="${java},${swig-java}"
+	classpathref="classpath.test"
+	>     
+      <formatters>
+	<formatter type="text"/>
+	<formatter type="text" toFile="${lint4j}/${libjhdf.name}.lint4j.txt"/>
+	<formatter type="xml" toFile="${lint4j}/${libjhdf.name}.lint4j.xml"/>
+      </formatters>
+    </lint4j>     
+  </target>
+
+
+  <!-- ==================================== 
+       target: pmd-report
+       Builds pmd reports
+       ==================================== -->
+  <target name="pmd" depends="pmd-run"
+	  description="Builds pmd reports" >
+
+    <style in="${pmd}/${libjhdf.name}.pmd.xml" 
+	   out="${pmd}/index.html" 
+	   style="${pmd.xslt.html}"/>  
+  </target>
+
+ <!-- ==================================== 
+       target: pmd
+       Run pmd checks                   
+       ==================================== -->  
+  <target name="pmd-run" 	
+	  depends="init"
+	  if="pmd.available">
+
+    <mkdir dir="${pmd}"/>
+
+    <taskdef name="pmd" 
+	   classname="net.sourceforge.pmd.ant.PMDTask"
+	   classpathref="classpath.tools"/>
+
+    <pmd 
+	rulesetfiles="${pmd.ruleset-files}"
+	failonerror="false"
+	failOnRuleViolation="false"
+	shortFilenames="${pmd.short-filenames}" 
+	targetjdk="${javac.target}">
+    
+	<formatter type="text" toConsole="true"/>
+	<formatter type="xml" toFile="${pmd}/${libjhdf.name}.pmd.xml"/>
+      
+	<fileset dir="${java}">
+	  <include name="**/*.java"/>
+	</fileset>
+
+    </pmd>     
+  </target>
+
+ <!-- ==================================== 
+       target: findbugs
+       Builds findbugs reports
+       ==================================== -->
+  <target name="findbugs" depends="findbugs-run"
+	  description="Builds findbugs reports" >
+
+    <style in="${findbugs}/${libjhdf.name}.findbugs.xml" 
+	   out="${findbugs}/index.html" 
+	   style="${findbugs.xslt.html}"/>  
+  </target>
+
+ <!-- ==================================== 
+       target: findbugs
+       Run findbugs checks                   
+       ==================================== -->  
+  <target name="findbugs-run" 	
+	  depends="compile"
+	  if="findbugs.available">
+
+    <mkdir dir="${findbugs}"/>
+
+    <taskdef resource="edu/umd/cs/findbugs/anttask/tasks.properties"
+	     classpathref="classpath.tools"/>
+
+    <findbugs home="${findbugs-home}"
+      output="xml:withMessages"
+      outputfile="${findbugs}/${libjhdf.name}.findbugs.xml"
+      jvmargs="-Xmx512M">
+      <sourcePath path="${java}"/>
+      <class location="${classes}"/>
+    </findbugs>     
+  </target>
+
+
+  <!-- ================================= 
+       target: junit-compile
+       Compiles java source for tests
+       ================================= -->
+  <target name="junit-compile" 
+	  depends="compile">
+
+    <javac destdir="${classes}"
+	   classpathref="classpath.tools"
+	   debug="true"
+	   debuglevel="lines,vars,source"
+	   deprecation="${javac.deprication}"
+	   optimize="${javac.optimize}"
+	   verbose="${javac.verbose}"
+	   source="${javac.source}"
+	   target="${javac.target}">
+      <src path="${junit}"/>
+    </javac>
+
+    <copy todir="${classes}">
+      <fileset dir="${junit}">
+	<exclude name="**/*.java"/>
+	<exclude name="**/package.html"/>
+      </fileset>
+    </copy>
+  </target>
+   
+
+  <!-- ==================================== 
+       target: junit
+       Builds JUnit Reports                   
+       ==================================== -->
+  <target name="junit" 
+	  description="Builds JUnit test reports" 
+	  depends="cobertura">
+
+    <junitreport todir="${junit-reports}">
+      <fileset dir="${junit-reports}">
+	<include name="TEST-*.xml"/>
+      </fileset>
+      <report format="frames" todir="${junit-reports}"/>
+    </junitreport>
+  </target>
+
+
+  <!-- ==================================== 
+       target: junit-run
+       Run JUnit tests                     
+       ==================================== -->
+  <target name="junit-run" 
+	  description="Runs JUnit tests"
+	  depends="cobertura-instrument"
+	  if="junit.available">
+
+    <mkdir dir="${junit-reports}"/>
+
+    <property environment="env"/>
+    <echo message="${env.PATH}"/>
+    <junit printsummary="true" fork="true" forkmode="perBatch">      
+
+      <env key="PATH" path="${env.PATH}:${libjhdf.path}"/>
+
+      <sysproperty key="net.sourceforge.cobertura.datafile"
+		   file="${cobertura.data}"/>
+
+      <classpath location="${cobertura-classes}"/>
+      <classpath refid="classpath.test"/>
+      
+      <assertions>
+	<enable package="permafrost"/>
+      </assertions>
+
+      <formatter type="plain"/>
+      <formatter type="xml"/>
+
+      <batchtest todir="${junit-reports}">
+	 <fileset dir="${classes}">
+	   <include name="permafrost/hdf/libhdf/**/Test*.class"/>
+	   <exclude name="**/Test*$*.class"/>
+	 </fileset>
+      </batchtest>
+      <batchtest todir="${junit-reports}">
+	 <fileset dir="${classes}">
+	   <include name="permafrost/hdf/basic/**/Test*.class"/>
+	   <exclude name="**/Test*$*.class"/>
+	 </fileset>
+      </batchtest>
+     </junit>
+  </target>
+
+
+ <!-- ==================================== 
+       target: cobertura-instrument
+       Installs cobertura instrumentation in classes 
+       ==================================== -->  
+  <target name="cobertura-instrument" 
+	  depends="junit-compile"
+	  if="cobertura.available">
+
+    <mkdir dir="${cobertura-reports}"/>
+
+    <taskdef 
+	   resource="tasks.properties"
+	   classpathref="classpath.tools.asm-2"/>
+
+    <delete file="${cobertura.data}"/>
+    <delete dir="${cobertura-classes}"/>
+    <mkdir dir="${cobertura-classes}"/>
+    
+    <cobertura-instrument datafile="${cobertura.data}" 
+			  todir="${cobertura-classes}">
+      <!-- Do not instrument log4j refs -->
+      <ignore regex="org.apache.log4j.*" />
+
+      <fileset dir="${classes}">
+	<include name="**/*.class"/>
+	<exclude name="**/Test*.class"/>
+      </fileset>
+    </cobertura-instrument>
+  </target>
+
+<!-- ==================================== 
+       target: cobertura
+       Extracts cobertura report from unit test metadata
+       ==================================== -->  
+  <target name="cobertura" 
+	  description="Builds Cobertura reports" 
+	  depends="junit-run"
+	  if="cobertura.available">
+
+    <taskdef 
+	   resource="tasks.properties"
+	   classpathref="classpath.tools.asm-2"/>
+
+    <cobertura-report 
+	destdir="${cobertura-reports}" 
+	datafile="${cobertura.data}"
+	format="xml">
+      <fileset dir="${java}">
+        <include name="**/*.java" />
+      </fileset>
+      <fileset dir="${swig-java}">
+	<include name="**/*.java" />
+      </fileset>
+    </cobertura-report>
+
+    <cobertura-report 
+	destdir="${cobertura-reports}" 
+	datafile="${cobertura.data}"
+	format="html">
+      <fileset dir="${java}">
+	<include name="**/*.java" />
+      </fileset>
+      <fileset dir="${swig-java}">
+	<include name="**/*.java" />
+      </fileset>
+    </cobertura-report>
+  </target>
+
+
+</project>

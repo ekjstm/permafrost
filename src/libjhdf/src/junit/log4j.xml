@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+   <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+      <param name="Target" value="System.out"/> 
+      <layout class="org.apache.log4j.PatternLayout"> 
+         <param name="ConversionPattern" value="%r [%t] %p %c %x - %m%n"/> 
+      </layout>    
+  </appender>
+
+  <!-- Uncomment the appender-ref element in the root, below,
+       to enable the file output appender. -->
+   <appender name="FileAppender" class="org.apache.log4j.FileAppender">
+     <param name="Append" value="false"/>
+     <param name="File" value="coasketch2.log"/>
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="ConversionPattern" value="%r [%t] %p %c %x - %m%n"/> 
+     </layout>
+   </appender>
+   
+ <!-- org.apache.axis makes heavy use of the DEBUG/INFO level loggers.
+      Don't use unless you want a ton of logs.  -->
+  <category name="org.apache">
+      <priority value="WARN"/>
+  </category>
+  <!-- Enable httpclient.wire at DEBUG to view http stream data 
+       If you're not sure what's getting sent, this is what you
+       want.  -->
+ <category name="httpclient.wire">
+      <priority value="FATAL"/>
+  </category>
+  <!-- Setting from Axis2 defaults -->
+  <category name="de.hunsicker">
+      <priority value="FATAL"/>
+  </category>
+
+  <!-- Anything in cs2 package is run at DEBUG 
+       for testing. -->
+  <category name="mil.af.cs2">
+    <priority value="DEBUG"/>
+  </category>
+  <!-- Specific packages are controlled individually to
+       allow the amount of logging to be reduced. -->
+  <!--
+  <category name="com.sra.vignette.librarian">
+    <priority value="DEBUG"/>
+  </category>
+  <category name="com.sra.vignette.model">
+    <priority value="DEBUG"/>
+  </category>
+  <category name="com.sra.vignette.common">
+    <priority value="DEBUG"/>
+  </category>
+	-->
+  <root>
+    <priority value ="TRACE" />
+    <!-- <appender-ref ref="FileAppender"/> -->
+    <appender-ref ref="ConsoleAppender"/>
+  </root>
+</log4j:configuration> 

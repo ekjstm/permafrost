@@ -1,0 +1,5 @@
+This directory is for jars that are used by tools or tests, but not the main project.
+
+The main project should not use any jar from this directory. If the main project adds a dependency on one of the tools libraries, that library should be moved to the main libs directory.
+
+Cobertura depends on ASM 2.2.1. Most other tools have moved to ASM 3.x, so we need to maintain two directories seperated in the classpath.

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="libjhdf.dll" name="native code">
+  <description>Builds linjhdf native code.</description>
+  <property file="local.properties"/>
+  <property file="project.properties"/>
+  <import file="classpath.xml"/>
+
+
+
+  <!-- ================================= 
+       target: clean-swig
+       Removes SWIG generated files.
+       ================================= -->
+    <target name="clean-swig"
+            description="Removes SWIG generated files">
+      <delete dir="${swig-java}"/>    
+      <delete dir="${swig-c}"/>
+      <mkdir dir="${swig-java}"/>
+      <mkdir dir="${swig-c}"/>
+    </target>  
+
+
+    <!-- ================================= 
+	 target: swig
+	 Runs SWIG
+	 ================================= -->
+    <target name="swig" depends="init"
+            description="Runs SWIG code generator.">      
+      <mkdir dir="${swig-java}/permafrost/hdf/libhdf"/>
+      <mkdir dir="${swig-c}"/>
+      
+      <apply 
+	  executable="${swig.exe}" 
+	  dest="${swig-c}" 
+	  failonerror="true" 
+	  verbose="true">
+	<arg value="-Wall"/>
+	<!-- <arg value="-Wallkw"/> -->
+	<arg value="-java"/>
+	<arg line="-package &quot;permafrost.hdf.libhdf&quot;"/>
+	<arg line="-outdir &quot;${swig-java}/permafrost/hdf/libhdf&quot;"/>
+	<arg value="-o"/>
+	<targetfile/>
+	<fileset dir="${swig}">
+	  <include name="H5*public_wrap*.i"/>
+	</fileset>
+	<chainedmapper>
+	  <flattenmapper />
+	  <globmapper from="*.i" to="*.c"/>
+	</chainedmapper>
+      </apply>     
+    </target>  
+
+
+  <!-- ================================= 
+	 target: libjhdf.dll
+	 Compiles and links libjhdf.dll
+	 ================================= -->
+    <target name="libjhdf.dll" depends="init"
+            description="Compiles and links libjhdf.">      
+      <exec executable="${msbuild.exe}" failonerror="true" os="Windows XP">
+	<!-- <arg value="/target:rebuild"/> -->
+	<arg value="/target:build"/>
+	<arg value="${libjhdf.sln}"/>
+      </exec>
+      <copy todir="${basedir}">
+	<fileset dir="Debug">
+	  <include name="*.dll"/>
+	</fileset>
+      </copy>
+    </target>  
+
+
+
+</project>
+
